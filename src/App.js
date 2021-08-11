@@ -10,7 +10,7 @@ import React, {useState} from 'react';
 // Import the dummyData
 import './App.css';
 import Posts from './components/Posts/Posts';
-import SeacrchBar from './components/SearchBar/SearchBar';
+import SearchBar from './components/SearchBar/SearchBar';
 import dummyData from './dummy-data';
 
 
@@ -20,7 +20,7 @@ const App = () => {
   // To make the search bar work (which is stretch) we'd need another state to hold the search term.
   
   const [posts, setPosts] = useState(dummyData);
-  // const [searchBar, setSearchBar] = useState('')
+  const [searchBar, setSearchBar] = useState('')
 
   console.log(posts)
 
@@ -36,11 +36,11 @@ const App = () => {
         - if the `id` of the post matches `postId`, return a new post object with the desired values (use the spread operator).
         - otherwise just return the post object unchanged.
      */
-    const updateLikes = posts.map(item => {
-      if (item.postId === postId) {
-        return { ...item, likes: item.likes + 1 }
+    const updateLikes = posts.map(post => {
+      if (post.id === postId) {
+        return { ...post, likes: (post.likes + 1) }
       } else {
-        return item;
+        return post;
       }
     })
     setPosts(updateLikes);
@@ -49,8 +49,8 @@ const App = () => {
   return (
     <div className='App'>
       {/* Add SearchBar and Posts here to render them */}
+      <SearchBar /> 
       <Posts posts={posts} likePost={likePost}/>
-      {/* <SearchBar /> */}
       {/* Check the implementation of each component, to see what props they require, if any! */}
     </div>
   );
